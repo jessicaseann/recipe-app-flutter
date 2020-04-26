@@ -1,7 +1,7 @@
 
 class Recipe {
 
-  final String id; 
+  final int id; 
   final String image; 
   final String title; 
   final int readyInMinutes; 
