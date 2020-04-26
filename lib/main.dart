@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipeappflutter/pages/recipe/recipe_list_page.dart';
+import 'package:recipeappflutter/view_models/recipe_list_view_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home : RecipeListPage()
+      home : ChangeNotifierProvider(
+        create: (context) => RecipeListViewModel(), 
+        child: RecipeListPage(),
+      )
+      
+      // RecipeListPage()
     );
   }
 }

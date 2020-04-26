@@ -21,7 +21,7 @@ class RecipeList extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(recipe.image)
+                image: recipe.image != null ? NetworkImage(recipe.image) : Image.network('https://i.picsum.photos/id/102/250/250.jpg')
               ),
               borderRadius: BorderRadius.circular(6)
             ),
