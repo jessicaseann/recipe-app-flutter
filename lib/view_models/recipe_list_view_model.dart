@@ -6,13 +6,16 @@ import 'package:recipeappflutter/view_models/recipe_view_model.dart';
 
 class RecipeListViewModel extends ChangeNotifier {
 
-  List<RecipeViewModel> recipes = List<RecipeViewModel>(); 
+  List<RecipeViewModel> recipes = List<RecipeViewModel>();
+  bool loading = false; 
 
   Future<void> fetchRandomRecipes() async {
-    
+    this.loading = true;
     final results = await Webservices().fetchRandomRecipes();
     this.recipes = results != null ? results.map((item) => RecipeViewModel(recipe: item)).toList() : null;
     print(this.recipes);
+    this.loading = false;
     notifyListeners(); 
   }
+
 }

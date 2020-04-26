@@ -3,7 +3,7 @@ import 'package:recipeappflutter/view_models/recipe_view_model.dart';
 
 class RecipeList extends StatelessWidget {
 
-  final List<dynamic> recipes; 
+  final List<RecipeViewModel> recipes; 
 
   RecipeList({this.recipes});
 
@@ -21,7 +21,7 @@ class RecipeList extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(recipe.image)
+                image: recipe.image != null ? NetworkImage(recipe.image) : Image.network('https://i.picsum.photos/id/102/250/250.jpg')
               ),
               borderRadius: BorderRadius.circular(6)
             ),
