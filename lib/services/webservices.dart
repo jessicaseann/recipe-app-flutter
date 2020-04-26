@@ -11,15 +11,17 @@ class Webservices {
 
   Future<List<Recipe>> fetchRandomRecipes() async {
 
-    final url = "$BASE/recipes/random?number=1&apiKey=$API_KEY";
+    final url = "$BASE/recipes/random?number=10&apiKey=$API_KEY";
     try {
       final response = await http.get(url);
-      print(response.body);
+      // print(response.body);
       if(response.statusCode == 200) {
         final body = jsonDecode(response.body); 
         final Iterable json = body["recipes"];
-        print(json);
+        // print(json);
         return json.map((recipe) => Recipe.fromJson(recipe)).toList();
+      } else {
+        return null;
       }
     } catch(e) {
       print(e);

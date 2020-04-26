@@ -3,7 +3,7 @@ import 'package:recipeappflutter/view_models/recipe_view_model.dart';
 
 class RecipeList extends StatelessWidget {
 
-  final List<RecipeViewModel> recipes; 
+  final List<dynamic> recipes; 
 
   RecipeList({this.recipes});
 
