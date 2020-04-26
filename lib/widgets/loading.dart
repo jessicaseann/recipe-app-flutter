@@ -8,9 +8,9 @@ class Loading extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Center(
-        child: SpinKitPouringHourglass(
+        child: SpinKitFadingCube(
           color: Color.fromRGBO(250, 120, 130, 1),
-          size: 50.0,
+          size: 30.0,
         ),
       ),
     );

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:recipeappflutter/models/recipe.dart';
 import 'package:recipeappflutter/services/webservices.dart';
 import 'package:recipeappflutter/view_models/recipe_view_model.dart';
 
