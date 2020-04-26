@@ -36,6 +36,7 @@ class HomePopularRecipeWidget extends Widget {
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   alignment: Alignment.centerLeft,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         recipe.title,
