@@ -30,4 +30,24 @@ class Webservices {
       return null;
     }
   }
+
+  Future<List<Recipe>> searchRecipe(String search) async {
+
+    final url = "$BASE/recipes/search?query=$search&number=10&apiKey=$API_KEY";
+    try {
+      final response = await http.get(url);
+      print(response.body);
+      if(response.statusCode == 200) {
+        final body = jsonDecode(response.body); 
+        final Iterable json = body["results"];
+        // print(json);
+        return json.map((recipe) => Recipe.fromJson(recipe)).toList();
+      } else {
+        return null;
+      }
+    } catch(e) {
+      print(e);
+      return null;
+    }
+  }
 }

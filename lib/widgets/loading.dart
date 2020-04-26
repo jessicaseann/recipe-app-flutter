@@ -9,7 +9,7 @@ class Loading extends StatelessWidget {
       color: Colors.white,
       child: Center(
         child: SpinKitPouringHourglass(
-          color: Colors.blue,
+          color: Color.fromRGBO(250, 120, 130, 1),
           size: 50.0,
         ),
       ),

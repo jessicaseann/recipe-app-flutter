@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeappflutter/pages/dashboard/Dashboard.dart';
 import 'package:recipeappflutter/view_models/recipe_list_view_model.dart';
+import 'package:recipeappflutter/pages/search/search_page.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -15,6 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  int index = 0;
   Widget getBody(int index) {
     switch (index) {
       case 0:
@@ -22,15 +24,17 @@ class HomeState extends State<Home> {
           create: (context) => RecipeListViewModel(),
           child: Dashboard(),
         );
-      default:
-        return Container();
+      case 1:
+        return ChangeNotifierProvider(
+          create: (context) => RecipeListViewModel(),
+          child: SearchPage(),
+        );
     }
+    return Center(child: Text("There is no page builder for this index."),);
   }
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-
     return Scaffold(
       body: getBody(index),
       bottomNavigationBar: BottomNavigationBar(
