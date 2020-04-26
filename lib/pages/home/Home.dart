@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:recipeappflutter/models/recipe.dart';
 import 'package:recipeappflutter/pages/home/widget/HomePopularRecipeWidget.dart';
 import 'package:recipeappflutter/pages/home/widget/HomeRandomRecipeWidget.dart';
+import 'package:recipeappflutter/pages/search/search_page.dart';
+import 'package:recipeappflutter/view_models/recipe_list_view_model.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -15,10 +18,60 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: _getBody(index),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
+        unselectedFontSize: 12,
+        selectedFontSize: 12,
+        onTap: (value) => setState(() => index = value),
+        selectedItemColor: Color.fromRGBO(250, 120, 130, 1),
+        items: [
+          BottomNavigationBarItem(
+            title: Container(
+              margin: EdgeInsets.only(top: 4, bottom: 4),
+              child: Text("Recipes",
+                  style:
+                      GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
+            ),
+            icon: Container(
+                margin: EdgeInsets.only(top: 8),
+                child: Icon(Icons.content_copy)),
+          ),
+          BottomNavigationBarItem(
+              title: Container(
+                margin: EdgeInsets.only(top: 4, bottom: 4),
+                child: Text("Search",
+                    style:
+                        GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
+              ),
+              icon: Container(
+                margin: EdgeInsets.only(top: 8),
+                child: Icon(Icons.search),
+              )),
+          BottomNavigationBarItem(
+            title: Container(
+              margin: EdgeInsets.only(top: 4, bottom: 4),
+              child: Text("Saved",
+                  style:
+                      GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
+            ),
+            icon: Container(
+                margin: EdgeInsets.only(top: 8),
+                child: Icon(Icons.bookmark_border)),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _getBody(int index) {
+    switch (index) {
+      case 0:
+        return SingleChildScrollView(
         child: Stack(
           children: <Widget>[
             Container(
@@ -120,48 +173,14 @@ class HomeState extends State<Home> {
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        unselectedFontSize: 12,
-        selectedFontSize: 12,
-        selectedItemColor: Color.fromRGBO(250, 120, 130, 1),
-        items: [
-          BottomNavigationBarItem(
-            title: Container(
-              margin: EdgeInsets.only(top: 4, bottom: 4),
-              child: Text("Recipes",
-                  style:
-                      GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
-            ),
-            icon: Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Icon(Icons.content_copy)),
-          ),
-          BottomNavigationBarItem(
-              title: Container(
-                margin: EdgeInsets.only(top: 4, bottom: 4),
-                child: Text("Search",
-                    style:
-                        GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
-              ),
-              icon: Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Icon(Icons.search),
-              )),
-          BottomNavigationBarItem(
-            title: Container(
-              margin: EdgeInsets.only(top: 4, bottom: 4),
-              child: Text("Saved",
-                  style:
-                      GoogleFonts.roboto(textStyle: TextStyle(fontSize: 12))),
-            ),
-            icon: Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Icon(Icons.bookmark_border)),
-          )
-        ],
-      ),
-    );
+      ); // Create this function, it should return your first page as a widget
+      case 1:
+        return ChangeNotifierProvider(
+          create: (context) => RecipeListViewModel(), 
+          child: SearchPage(),
+        ); // Create this function, it should return your second page as a widget
+    }
+
+    return Center(child: Text("There is no page builder for this index."),);
   }
 }
