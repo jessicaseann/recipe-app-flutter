@@ -18,4 +18,15 @@ class RecipeListViewModel extends ChangeNotifier {
     notifyListeners(); 
   }
 
+  
+  Future<void> searchRecipe(String text) async {
+    this.loading = true;
+    notifyListeners(); 
+    final results = await Webservices().searchRecipe(text);
+    this.recipes = results != null ? results.map((item) => RecipeViewModel(recipe: item)).toList() : null;
+    print(this.recipes);
+    this.loading = false;
+    notifyListeners(); 
+  }
+
 }

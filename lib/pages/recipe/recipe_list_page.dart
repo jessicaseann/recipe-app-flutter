@@ -27,20 +27,15 @@ class _RecipeListPageState extends State<RecipeListPage> {
 
     final data = Provider.of<RecipeListViewModel>(context);
     if (!data.loading && data.recipes != null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("Recipes")
-        ),
-        body: Container(
-            padding: EdgeInsets.all(10),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: RefreshIndicator(
-              onRefresh: () => data.fetchRandomRecipes(),
-              child: RecipeList(recipes: data.recipes)
-            )
-          )
-        );
+      return  Container(
+        padding: EdgeInsets.all(10),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: RefreshIndicator(
+          onRefresh: () => data.fetchRandomRecipes(),
+          child: RecipeList(recipes: data.recipes)
+        )
+      );
     } else if (data.loading) {
       return Loading();
     } else {
