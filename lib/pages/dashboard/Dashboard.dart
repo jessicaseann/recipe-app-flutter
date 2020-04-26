@@ -5,6 +5,7 @@ import 'package:recipeappflutter/models/recipe.dart';
 import 'package:recipeappflutter/pages/dashboard/widget/HomePopularRecipeWidget.dart';
 import 'package:recipeappflutter/pages/dashboard/widget/HomeRandomRecipeWidget.dart';
 import 'package:recipeappflutter/view_models/recipe_list_view_model.dart';
+import 'package:recipeappflutter/widgets/loading.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -16,14 +17,13 @@ class DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
 
-    Provider.of<RecipeListViewModel>(context, listen: false)
-        .fetchRandomRecipes();
+    Provider.of<RecipeListViewModel>(context, listen: false).fetchRandomRecipes();
   }
 
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<RecipeListViewModel>(context);
-    if (data.recipes != null) {
+    if (!data.loading && data.recipes != null) {
       return Container(
         child: SingleChildScrollView(
           child: Stack(
@@ -126,6 +126,8 @@ class DashboardState extends State<Dashboard> {
           ),
         ),
       );
+    } else {
+      return Loading();
     }
   }
 }
