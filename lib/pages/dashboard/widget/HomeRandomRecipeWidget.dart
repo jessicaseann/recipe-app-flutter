@@ -51,7 +51,8 @@ class HomeRandomRecipeWidget extends Widget{
                             Container(
                               child: Text(recipe.title, textAlign: TextAlign.left,
                                 style: TextStyle(fontSize: 22,
-                                letterSpacing: 1.2),),
+                                letterSpacing: 1.2),
+                              maxLines: 1,),
                               alignment: Alignment.centerLeft,
                             ),
                             Container(

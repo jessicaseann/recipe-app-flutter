@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:recipeappflutter/models/recipe.dart'; 
 
+// ignore: non_constant_identifier_names
 final String API_KEY = '7ba0e5403dc5428e9cde39964adb07d1';
+// ignore: non_constant_identifier_names
 final String BASE = 'https://api.spoonacular.com';
 
 class Webservices {
